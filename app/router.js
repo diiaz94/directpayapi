@@ -1,13 +1,7 @@
 var express = require('express');
-var authMidleware = require('./midlewares/auth');
-var authController = require('./controllers/auth');
-var dropboxController = require('./controllers/dropbox');
-var locationController = require('./controllers/location');
-var userController = require('./controllers/user');
-var requestController = require('./controllers/request');
-var supplyController = require('./controllers/supply');
-
-var adminController = require('./controllers/admin/main');
+var userControllers = require('./controllers/user');
+var productControllers = require('./controllers/product');
+var transactionControllers = require('./controllers/transaction');
 
 module.exports = function(app) {
 
@@ -22,34 +16,11 @@ module.exports = function(app) {
 
     /* Authenticate and Authorization processes */
 
-    apiRoutes.post('/signin', authController.signin);
-    apiRoutes.post('/accounts/facebook', authController.acountsFacebook);
-    apiRoutes.post('/signup', authController.signup);
-    apiRoutes.get('/signout', authMidleware.authenticate, authController.signout);
+    apiRoutes.get('/users', userControllers.list);
+    apiRoutes.get('/products', productControllers.list);
+    //apiRoutes.post('/transactions', transactionControllers.add);
 
 
-    apiRoutes.post('/upload', dropboxController.upload);
-    apiRoutes.get('/waashgreen/:rut/:name', dropboxController.download);
-
-    apiRoutes.get('/countries', locationController.countries);
-
-    //apiRoutes.get('/locations', locationController.locations); //generation
-    apiRoutes.get('/regions', locationController.regions);
-
-    //apiRoutes.post('/add-commune', locationController.addComune);
-
-    //Admin routes
-    apiRoutes.get('/admin/dashboard', authMidleware.authenticate, authMidleware.admin, adminController.dashboard);
-    apiRoutes.get('/admin/reports', authMidleware.authenticate, authMidleware.admin, adminController.reports);
-    apiRoutes.get('/admin/users/detail', authMidleware.authenticate, authMidleware.admin, userController.detail);
-    apiRoutes.get('/admin/users', authMidleware.authenticate, authMidleware.admin, userController.list);
-    apiRoutes.post('/admin/users', authMidleware.authenticate, authMidleware.admin, userController.createAdmin);
-    apiRoutes.delete('/admin/users', authMidleware.authenticate, authMidleware.admin, userController.delete);
-    apiRoutes.get('/admin/requests', authMidleware.authenticate, authMidleware.admin, requestController.list);
-    apiRoutes.patch('/admin/requests/status', authMidleware.authenticate, authMidleware.admin, requestController.updateStatus);
-
-    apiRoutes.post('/admin/supplies', authMidleware.authenticate, authMidleware.admin, supplyController.assign);
-    apiRoutes.get('/admin/supplies/types', authMidleware.authenticate, authMidleware.admin, supplyController.types);
 
     app.use('/api', apiRoutes);
 }

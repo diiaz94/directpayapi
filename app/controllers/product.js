@@ -1,7 +1,7 @@
-var User = require('../models/user');
+var Product = require('../models/product');
 
 exports.list = function(req, res) {
-    User.list({
+    Product.list({
         status: 'active'
     }, function(err, users) {
         if (err) {

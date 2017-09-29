@@ -2,14 +2,17 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-var UserSchema = new Schema({
+var ProductSchema = new Schema({
     name: String,
     photo_url: String,
+    price: Number,
+    description: String,
+    starts: Number,
     status: {
         type: String,
-        enum: ['active', 'deleted'],
+        enum: ['active', 'deleted', 'unavailable'],
         default: 'active'
-    }
+    },
 }, {
     timestamps: {
         createdAt: 'created_at',
@@ -19,4 +22,4 @@ var UserSchema = new Schema({
 
 
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Product', ProductSchema);
