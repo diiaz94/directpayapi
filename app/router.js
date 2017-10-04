@@ -17,10 +17,11 @@ module.exports = function(app) {
     /* Authenticate and Authorization processes */
 
     apiRoutes.get('/users', userControllers.list);
+    apiRoutes.post('/users', userControllers.add);
     apiRoutes.get('/products', productControllers.list);
     //apiRoutes.post('/transactions', transactionControllers.add);
 
 
 
-    app.use('/api', apiRoutes);
+    app.use('/v1', apiRoutes);
 }

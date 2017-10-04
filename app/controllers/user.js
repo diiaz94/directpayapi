@@ -1,4 +1,5 @@
 var User = require('../models/user');
+var util = require('../utils/util');
 
 exports.list = function(req, res) {
     User.list({
@@ -11,4 +12,15 @@ exports.list = function(req, res) {
             users: users
         });
     });
+};
+
+exports.add = function(req, res) {
+
+    User.add(req.body,
+        function(err, result) {
+            if (err) {
+                return util.errorResponse(res, err.name, err.extra);
+            }
+            return util.okResponse(res, 201, result);
+        });
 };
