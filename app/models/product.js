@@ -8,14 +8,14 @@ exports.list = function(match, next) {
         });
     }
 
-    Product.find(match, function(err, users) {
+    Product.find(match, function(err, products) {
         if (err) {
             return next({
                 name: "INTERNAL_ERROR",
                 extra: err
             });
         } else if (users) {
-            return next(null, users);
+            return next(null, products);
         } else {
             return next({
                 name: "INTERNAL_UKNOW_ERROR"

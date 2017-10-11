@@ -4,12 +4,12 @@ var util = require('../utils/util');
 exports.list = function(req, res) {
     Product.list({
         status: 'active'
-    }, function(err, users) {
+    }, function(err, products) {
         if (err) {
             return util.errorResponse(res, err.name, err.extra);
         }
         return util.okResponse(res, 200, {
-            users: users
+            products: products
         });
     });
 };
