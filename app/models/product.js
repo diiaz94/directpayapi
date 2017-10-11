@@ -14,7 +14,7 @@ exports.list = function(match, next) {
                 name: "INTERNAL_ERROR",
                 extra: err
             });
-        } else if (users) {
+        } else if (products) {
             return next(null, products);
         } else {
             return next({
