@@ -7,7 +7,7 @@ var ProductSchema = new Schema({
     photo_url: String,
     price: Number,
     description: String,
-    starts: Number,
+    rating: Number,
     status: {
         type: String,
         enum: ['active', 'deleted', 'unavailable'],

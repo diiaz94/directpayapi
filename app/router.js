@@ -19,6 +19,7 @@ module.exports = function(app) {
     apiRoutes.get('/users', userControllers.list);
     apiRoutes.post('/users', userControllers.add);
     apiRoutes.get('/products', productControllers.list);
+    apiRoutes.post('/products', productControllers.add);
     //apiRoutes.post('/transactions', transactionControllers.add);
 
 

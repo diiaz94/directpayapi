@@ -23,3 +23,30 @@ exports.list = function(match, next) {
         }
     });
 }
+
+
+exports.add = function(attrs, next) {
+
+    if (!attrs) {
+        return next({
+            name: "MISSING_REQUIRED_FIELDS"
+        });
+    }
+
+    var newProduct = new Product(attrs);
+    newProduct.save(function(err, result) {
+        if (err) {
+            return next({
+                name: "INTERNAL_ERROR",
+                extra: err
+            });
+        } else if (result) {
+            return next(null, result);
+        } else {
+            return next({
+                name: "INTERNAL_UKNOW_ERROR"
+            });
+        }
+    });
+
+}
