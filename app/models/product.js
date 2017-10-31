@@ -24,7 +24,6 @@ exports.list = function(match, next) {
     });
 }
 
-
 exports.add = function(attrs, next) {
 
     if (!attrs) {
