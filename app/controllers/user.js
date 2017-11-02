@@ -2,9 +2,16 @@ var User = require('../models/user');
 var util = require('../utils/util');
 
 exports.list = function(req, res) {
-    User.list({
-        status: 'active'
-    }, function(err, users) {
+    var user_id = req.query.user_id;
+    var role = req.query.role;
+
+    var obj = {};
+    obj["status"] = "active";
+
+    if (role)
+        obj["role"] = role;
+
+    User.list(obj, user_id, function(err, users) {
         if (err) {
             return util.errorResponse(res, err.name, err.extra);
         }

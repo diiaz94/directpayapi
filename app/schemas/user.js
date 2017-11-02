@@ -14,6 +14,11 @@ var UserSchema = new Schema({
         type: String,
         enum: ['active', 'deleted'],
         default: 'active'
+    },
+    role: {
+        type: String,
+        enum: ['customer', 'commerce'],
+        default: 'customer'
     }
 }, {
     timestamps: {
@@ -21,7 +26,5 @@ var UserSchema = new Schema({
         updatedAt: 'updated_at'
     }
 });
-
-
 
 module.exports = mongoose.model('User', UserSchema);

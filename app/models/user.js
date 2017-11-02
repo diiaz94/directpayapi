@@ -130,7 +130,7 @@ exports.get = function(id, next) {
     });
 }
 
-exports.list = function(match, next) {
+exports.list = function(match, user, next) {
 
     if (!match) {
         return next({
@@ -138,6 +138,7 @@ exports.list = function(match, next) {
         });
     }
 
+    match["_id"] = { "$ne": mongoose.Types.ObjectId(user) };
     User.find(match, function(err, users) {
         if (err) {
             return next({
