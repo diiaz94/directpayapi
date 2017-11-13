@@ -12,13 +12,14 @@ exports.events = function(io) {
 
         socket.on('enter region', function(data) {
 
-            console.log("emit received ENTER region", data);
+            //console.log("emit received ENTER region");
             var beacon = data.beacon;
             var user = data.user;
             socket.join(beacon, function() {
                 UserSchema.findOne({ _id: user }, function(err, user) {
-                    //console.log("user", user)
+
                     if (user) {
+                        console.log("emit add user in beacon " + beacon + " " + user.name);
                         io.in(beacon).emit('add user', { user: user });
                     }
                 });
@@ -28,13 +29,13 @@ exports.events = function(io) {
 
         socket.on('exit region', function(data) {
 
-            console.log("emit received EXIT region", data);
+            //console.log("emit received EXIT region", data.user.name);
             var beacon = data.beacon;
             var user = data.user;
             socket.leave(beacon, function() {
                 UserSchema.findOne({ _id: user }, function(err, user) {
-                    //console.log("user", user)
                     if (user) {
+                        console.log("emit remove user in beacon " + beacon + " " + user.name);
                         io.in(beacon).emit('remove user', { user: user });
                     }
                 });
