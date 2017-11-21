@@ -3,8 +3,16 @@ var Schema = mongoose.Schema;
 
 
 var ReceiptSchema = new Schema({
+    sent_to: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     name: String,
     photo_url: String,
+    type: {
+        type: String,
+        enum: ['order', 'ticket']
+    },
     status: {
         type: String,
         enum: ['pending', 'paid', 'deleted'],

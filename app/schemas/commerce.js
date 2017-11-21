@@ -24,4 +24,4 @@ var CommerceSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('Country', CommerceSchema);
+module.exports = mongoose.model('Commerce', CommerceSchema);
