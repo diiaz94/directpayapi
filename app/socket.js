@@ -12,7 +12,7 @@ exports.events = function(io) {
 
         socket.on('enter region', function(data) {
 
-            //console.log("emit received ENTER region");
+            console.log("emit received ENTER region");
             var beacon = data.beacon;
             var user = data.user;
             socket.join(beacon, function() {

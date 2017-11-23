@@ -3,6 +3,10 @@ var Schema = mongoose.Schema;
 
 
 var ReceiptSchema = new Schema({
+    sent_by: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     sent_to: {
         type: Schema.Types.ObjectId,
         ref: 'User'

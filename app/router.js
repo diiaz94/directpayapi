@@ -4,6 +4,7 @@ var productController = require('./controllers/product');
 var commerceController = require('./controllers/commerce');
 var receiptController = require('./controllers/receipt');
 var transactionController = require('./controllers/transaction');
+var orderController = require('./controllers/order');
 
 module.exports = function(app) {
 
@@ -22,10 +23,16 @@ module.exports = function(app) {
     apiRoutes.post('/users', userController.add);
     apiRoutes.get('/products', productController.list);
     apiRoutes.post('/products', productController.add);
-    apiRoutes.get('/commerces', commerceController.list);
+    apiRoutes.get('/commerces', userController.list);
     apiRoutes.post('/commerces', commerceController.add);
     apiRoutes.get('/receipts', receiptController.list);
     apiRoutes.post('/receipts', receiptController.add);
+
+
+    apiRoutes.post('/orders', orderController.add);
+
+    //apiRoutes.post('/order', orderController.add);
+
     //apiRoutes.post('/transactions', transactionControllers.add);
 
 

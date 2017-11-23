@@ -10,6 +10,8 @@ var UserSchema = new Schema({
     },
     name: String,
     photo_url: String,
+    photo_url_large: String,
+    short_description: String,
     status: {
         type: String,
         enum: ['active', 'deleted'],

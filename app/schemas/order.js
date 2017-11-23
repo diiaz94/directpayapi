@@ -11,6 +11,10 @@ var OrderSchema = new Schema({
             enum: ['product', 'custom', 'deleted'],
         }
     }],
+    total: {
+        type: Number,
+        default: 0
+    },
     created_by: {
         type: Schema.Types.ObjectId,
         ref: 'User'
@@ -23,4 +27,4 @@ var OrderSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('Order', CommerceSchema);
+module.exports = mongoose.model('Order', OrderSchema);
