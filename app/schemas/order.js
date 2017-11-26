@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var OrderSchema = new Schema({
+    receipt: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     items: [{
         name: String,
         image_url: String,
@@ -14,10 +18,6 @@ var OrderSchema = new Schema({
     total: {
         type: Number,
         default: 0
-    },
-    created_by: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
     },
     status: {
         type: String,

@@ -39,7 +39,7 @@ exports.add = function(attrs, next) {
                 extra: err
             });
         } else if (result) {
-            return next(null, result);
+            return next(null, newItem);
         } else {
             return next({
                 name: "INTERNAL_UKNOW_ERROR"
