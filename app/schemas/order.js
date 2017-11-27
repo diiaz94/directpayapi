@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var OrderSchema = new Schema({
     receipt: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Receipt'
     },
     items: [{
         name: String,
