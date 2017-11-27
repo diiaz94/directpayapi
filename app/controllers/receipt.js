@@ -141,3 +141,25 @@ exports.add = function(req, res) {
         return util.okResponse(res, 201, { message: "receipt created successfully" });
     });
 };
+
+
+exports.update = function(req, res) {
+
+    var receipt = req.body.receipt;
+    var status = req.body.status;
+
+
+    Receipt.update({ _id: receipt }, {
+            status: status
+        },
+        function(err, data) {
+
+            if (err) {
+                return util.errorResponse(res, err.name, err.extra);
+            }
+
+            return util.okResponse(res, 201, { message: "receipt updated successfully" });
+
+        });
+
+}

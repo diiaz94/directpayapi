@@ -96,3 +96,27 @@ exports.add = function(attrs, next) {
     });
 
 };
+
+exports.update = function(find, attrs, next) {
+    if (!find || !attrs) {
+        return next({
+            name: "MISSING_REQUIRED_FIELDS"
+        });
+    }
+
+    Receipt.update(find, attrs, function(err, result) {
+        if (err) {
+            return next({
+                name: "INTERNAL_ERROR",
+                extra: err
+            });
+        } else if (result) {
+            return next(null, result);
+        } else {
+            return next({
+                name: "INTERNAL_UKNOW_ERROR"
+            });
+        }
+    });
+
+}

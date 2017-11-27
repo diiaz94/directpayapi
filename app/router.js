@@ -27,6 +27,7 @@ module.exports = function(app) {
     apiRoutes.post('/commerces', commerceController.add);
     apiRoutes.get('/receipts', receiptController.list);
     apiRoutes.post('/receipts', receiptController.add);
+    apiRoutes.patch('/receipts', receiptController.update);
 
 
     apiRoutes.post('/orders', orderController.add);
