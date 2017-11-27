@@ -55,7 +55,7 @@ exports.usersList = function(user, next) {
             }
         },
         { $unwind: "$user" },
-        { $project: { type: 1, status: 1, name: "$user.name", photo_url: "$user.photo_url" } }
+        { $project: { type: 1, status: 1, name: "$user.name", photo_url: "$user.photo_url", user_id: "$user._id" } }
     ], function(err, receipts) {
         if (err) {
             return next({
