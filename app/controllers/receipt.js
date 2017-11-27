@@ -117,14 +117,14 @@ exports.add = function(req, res) {
         function saveReference(receipt, callback) {
             if (type == "ticket") {
                 //TODO
-
+                callback(null);
 
             } else if (type == "order") {
                 Order.add({ receipt: receipt._id, total: total }, function(err, data) {
                     if (err) {
                         return util.errorResponse(res, err.name, err.extra);
                     }
-                    callback(null)
+                    callback(null);
                 });
             } else {
                 callback({
