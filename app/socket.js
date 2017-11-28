@@ -45,11 +45,8 @@ exports.events = function(io) {
 
         socket.on('new receipt', function(data) {
 
-
             var user = data.user;
-
-            io.in(beacon).emit('new receipt', { user: user });
-
+            socket.broadcast.emit('new receipt', { user: user });
 
         });
 
