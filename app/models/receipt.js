@@ -61,17 +61,34 @@ exports.usersList = function(user, next) {
         });
     }
 
-    Receipt.aggregate([{ $match: { status: "pending", "sent_to": mongoose.Types.ObjectId(user) } },
+    Receipt.aggregate([{ $match: { status: "pending", $or: [{ "sent_to": mongoose.Types.ObjectId(user) }, { "sent_by": mongoose.Types.ObjectId(user) }] } },
         {
             $lookup: {
                 from: 'users',
                 localField: 'sent_by',
                 foreignField: '_id',
-                as: 'user'
+                as: 'sent_by'
             }
         },
-        { $unwind: "$user" },
-        { $project: { type: 1, status: 1, name: "$user.name", photo_url: "$user.photo_url", user_id: "$user._id" } }
+        { $unwind: "$sent_by" },
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'sent_to',
+                foreignField: '_id',
+                as: 'sent_to'
+            }
+        },
+        { $unwind: "$sent_to" },
+        {
+            $project: {
+                type: 1,
+                status: 1,
+                name: { $cond: [{ $eq: ["$sent_by.role", "customer"] }, "$sent_by.name", "$sent_to.name"] },
+                photo_url: { $cond: [{ $eq: ["$sent_by.role", "customer"] }, "$sent_by.photo_url", "$sent_to.photo_url"] },
+                user_id: { $cond: [{ $eq: ["$sent_by.role", "customer"] }, "$sent_by._id", "$sent_to._id"] }
+            }
+        }
     ], function(err, receipts) {
         if (err) {
             return next({
