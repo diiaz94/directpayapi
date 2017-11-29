@@ -113,7 +113,15 @@ exports.add = function(attrs, next) {
     }
 
 
-    Receipt.findOne({ sent_to: attrs.sent_to, sent_by: attrs.sent_by }, function(err, receipt) {
+    Receipt.findOne({
+        $or: [{
+                $and: [{ "sent_to": mongoose.Types.ObjectId(attrs.sent_to) }, { "sent_by": mongoose.Types.ObjectId(attrs.sent_by) }]
+            },
+            {
+                $and: [{ "sent_to": mongoose.Types.ObjectId(attrs.sent_by) }, { "sent_by": mongoose.Types.ObjectId(attrs.sent_to) }]
+            }
+        ]
+    }, function(err, receipt) {
         if (err) {
             return next({
                 name: "INTERNAL_ERROR",
