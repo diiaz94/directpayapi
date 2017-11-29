@@ -121,7 +121,8 @@ exports.add = function(attrs, next) {
             {
                 $and: [{ "sent_to": mongoose.Types.ObjectId(attrs.sent_by) }, { "sent_by": mongoose.Types.ObjectId(attrs.sent_to) }]
             }
-        ]
+        ],
+        "status": "pending"
     }, function(err, receipt) {
         if (err) {
             return next({
