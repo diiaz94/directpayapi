@@ -34,7 +34,8 @@ exports.commercesList = function(user, next) {
                 type: 1,
                 status: 1,
                 name: { $cond: [{ $eq: ["$sent_by.role", "commerce"] }, "$sent_by.name", "$sent_to.name"] },
-                description: { $cond: [{ $eq: ["$sent_by.role", "commerce"] }, "$sent_by.description", "$sent_to.description"] }
+                description: { $cond: [{ $eq: ["$sent_by.role", "commerce"] }, "$sent_by.description", "$sent_to.description"] },
+                user_id: { $cond: [{ $eq: ["$sent_by.role", "commerce"] }, "$sent_by._id", "$sent_to._id"] }
             }
         }
     ], function(err, receipts) {
