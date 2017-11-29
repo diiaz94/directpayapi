@@ -16,11 +16,27 @@ exports.commercesList = function(user, next) {
                 from: 'users',
                 localField: 'sent_by',
                 foreignField: '_id',
-                as: 'commerce'
+                as: 'sent_by'
             }
         },
-        { $unwind: "$commerce" },
-        { $project: { type: 1, status: 1, name: "$commerce.name", description: "$commerce.description" } }
+        { $unwind: "$sent_by" },
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'sent_to',
+                foreignField: '_id',
+                as: 'sent_to'
+            }
+        },
+        { $unwind: "$sent_to" },
+        {
+            $project: {
+                type: 1,
+                status: 1,
+                name: { $cond: [{ $eq: ["$sent_by.role", "commerce"] }, "$sent_by.name", "$sent_to.name"] },
+                description: { $cond: [{ $eq: ["$sent_by.role", "commerce"] }, "$sent_by.description", "$sent_to.description"] }
+            }
+        }
     ], function(err, receipts) {
         if (err) {
             return next({
