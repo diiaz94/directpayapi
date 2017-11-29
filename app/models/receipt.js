@@ -79,20 +79,36 @@ exports.add = function(attrs, next) {
         });
     }
 
-    var newItem = new Receipt(attrs);
-    newItem.save(function(err, result) {
+
+    Receipt.findOne({ sent_to: attrs.sent_to, sent_by: attrs.sent_by }, function(err, receipt) {
         if (err) {
             return next({
                 name: "INTERNAL_ERROR",
                 extra: err
             });
-        } else if (result) {
-            return next(null, newItem);
+        } else if (receipt) {
+            console.log("exist")
+            return next(null, receipt);
         } else {
-            return next({
-                name: "INTERNAL_UKNOW_ERROR"
+            console.log("NOT exist")
+
+            var newItem = new Receipt(attrs);
+            newItem.save(function(err, result) {
+                if (err) {
+                    return next({
+                        name: "INTERNAL_ERROR",
+                        extra: err
+                    });
+                } else if (result) {
+                    return next(null, newItem);
+                } else {
+                    return next({
+                        name: "INTERNAL_UKNOW_ERROR"
+                    });
+                }
             });
         }
+
     });
 
 };
