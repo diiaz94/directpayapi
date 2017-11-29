@@ -10,7 +10,7 @@ exports.commercesList = function(user, next) {
         });
     }
 
-    Receipt.aggregate([{ $match: { status: "pending", "sent_to": mongoose.Types.ObjectId(user) } },
+    Receipt.aggregate([{ $match: { status: "pending", $or: [{ "sent_to": mongoose.Types.ObjectId(user) }, { "sent_by": mongoose.Types.ObjectId(user) }] } },
         {
             $lookup: {
                 from: 'users',
