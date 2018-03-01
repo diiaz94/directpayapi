@@ -1,10 +1,10 @@
 {
-  "name": "waashgreenapi",
-  "author": "Pedro Diaz",
+  "name": "pagodirectoapi",
+  "author": "Mariangelica Useche",
   "version": "0.0.1",
   "description": "Api Rest",
   "main": "server.js",
-  "repository": "https://btm-pdiaz@bitbucket.org/waashgreendev/api.git",
+  "repository": "https://musenberg404@bitbucket.org/btechmobility/pd-api.git",
   "script": {
     "start": "node server.js",
     "dev": "nodemon server.js"
