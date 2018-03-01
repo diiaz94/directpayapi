@@ -1,7 +1,7 @@
 exports.MIN_PASSWORD_LENGTH = 6;
-exports.MIN_RUT_LENGTH = 6;
-exports.BASE_FILES_PATH = 'https://waashgreenapi.herokuapp.com/api/files/';
-exports.DROPBOX_FOLDER_PATH = '/waashgreen';
+exports.MIN_RUT_LENGTH = 7;
+exports.BASE_FILES_PATH = 'https://pagodirecto.herokuapp.com/api/files/'; //TODO: Modificar de ser necesario
+exports.DROPBOX_FOLDER_PATH = '/pagodirecto'; //TODO: Modificar de ser necesario
 exports.ACCEPTED_EXTENSIONS = ['JPG', 'PNG', 'PDF'];
 exports.MAX_FILE_SIZE = 1000000; //1MB
 
@@ -21,10 +21,10 @@ exports.ERRORS = {
     code: "#1002",
     description: "Ya existe un usuario con estos datos."
   },
-  "RUT_TOO_SHORT": {
+  "CI_TOO_SHORT": {
     httpCode: 400,
     code: "#1003",
-    description: "El Rut deber tener al menos " + this.MIN_RUT_LENGTH + " caracteres."
+    description: "La cédula debe tener al menos " + this.MIN_RUT_LENGTH + " caracteres."
   },
   "PASSWORD_TOO_SHORT": {
     httpCode: 400,
