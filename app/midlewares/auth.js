@@ -28,8 +28,8 @@ exports.admin = function(req, res, next) {
     next();
 }
 
-exports.provider = function(req, res, next) {
-  if (req.decoded._doc.profile.role != 'provider')
+exports.commerce = function(req, res, next) {
+  if (req.decoded._doc.profile.role != 'commerce')
     return util.errorResponse(res, 'UNAUTHORIZATED');
   else
     next();
